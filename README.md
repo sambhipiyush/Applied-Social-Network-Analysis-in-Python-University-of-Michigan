@@ -85,6 +85,20 @@ In Module Four, you'll explore the evolution of networks over time, including th
 **Graded:** Assignment 4 Submission
 
 
+## Grading and Assignments
+
+|Course Item|Percentage of Final Grade|Passing Grade|
+|:---:|:---:|:---:|
+|Week 1 Quiz|5%|80%|
+|Week 1 Notebook Assignment|18%|80%|
+|Week 2 Quiz|5%|80%|
+|Week 2 Notebook Assignment|18%|80%|
+|Week 3 Quiz|5%|80%|
+|Week 3 Notebook Assignment|18%|80%|
+|Week 4 Quiz|5%|80%|
+|Week 4 Notebook Assignment|26%|80%|
+
+
 #
 #
 #### ***Kudos!!!***
