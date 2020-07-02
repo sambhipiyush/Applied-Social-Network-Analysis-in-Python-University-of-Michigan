@@ -293,7 +293,7 @@ by University of Michigan
 1. We have the weighted networks for which we add a weight attribute in the edges when we add the edges
 	<p align="center">
 	  <a href="javascript:void(0)" rel="noopener">
-	 <img width=400px  src="notesImages/network_summary_image11.png" alt="network_summary_image11"></a>
+	 <img width=800px  src="notesImages/network_summary_image11.png" alt="network_summary_image11"></a>
 	</p>
 
 
@@ -444,7 +444,7 @@ by University of Michigan
 	1. all the nodes, sometimes we're interested in a particular node
 		<p align="center">
 		  <a href="javascript:void(0)" rel="noopener">
-		 <img width=400px  src="notesImages/node_summary_image2.png" alt="node_summary_image2"></a>
+		 <img width=800px  src="notesImages/node_summary_image2.png" alt="node_summary_image2"></a>
 		</p>
 
 ### Bipartite Graphs
