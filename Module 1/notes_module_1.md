@@ -143,10 +143,10 @@ by University of Michigan
 			 <img width=400px  src="notesImages/network_vocab_overview_image2.png" alt="network_vocab_overview_image2"></a>
 			</p>
 		* Using NETWORKX in python
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/network_networkx_pythoncode_image3.png" alt="network_networkx_pythoncode_image3"></a>
-			</p>
+				<p align="center">
+				  <a href="javascript:void(0)" rel="noopener">
+				 <img width=400px  src="notesImages/network_networkx_pythoncode_image3.png" alt="network_networkx_pythoncode_image3"></a>
+				</p>
 			```python
 			>>> import networkx as nx
 			>>> G = nx.Graph()
@@ -156,10 +156,10 @@ by University of Michigan
 			```
 		* If the pairs of nodes that you're adding are not in the graph already, **NetworkX** will automatically add them to the graph
 * *Network* of **Friendship**
-	<p align="center">
-	  <a href="javascript:void(0)" rel="noopener">
-	 <img width=400px  src="notesImages/network_friendship_image2.png" alt="network_friendship_image2"></a>
-	</p>
+		<p align="center">
+		  <a href="javascript:void(0)" rel="noopener">
+		 <img width=400px  src="notesImages/network_friendship_image2.png" alt="network_friendship_image2"></a>
+		</p>
 	* This is a network between people and the edges here represent friendship, marital ties and family ties among 2,200 people
 		* **Nodes** : People
 		* **Edges** : Friendship, marital, or family ties
@@ -167,10 +167,10 @@ by University of Michigan
 	* When you look at this network one thing that you can see is that these edges are mostly symmetric relationships
 		* that is, if A is a friend of B, then B is also a friend of A. At least most of the time, that's the case
 * Food Web Network
-	<p align="center">
-	  <a href="javascript:void(0)" rel="noopener">
-	 <img width=400px  src="notesImages/network_food_web_image11.png" alt="network_food_web_image11"></a>
-	</p>
+		<p align="center">
+		  <a href="javascript:void(0)" rel="noopener">
+		 <img width=400px  src="notesImages/network_food_web_image11.png" alt="network_food_web_image11"></a>
+		</p>
 	* This network represents what animals eat other animals
 		* **Nodes** : Birds
 		* **Edges** : What eats what
@@ -308,109 +308,109 @@ by University of Michigan
 		</p>
 * Once loaded, how to access **edge attributes** data using NetworkX lib
 	* Since we are taking an example of **undirected graph**, therefore order in which we will place the end points of the edge does not matter
-		<p align="center">
-		  <a href="javascript:void(0)" rel="noopener">
-		 <img width=400px  src="notesImages/edge_attribs_network_example_image1.png" alt="edge_attribs_network_example_image1"></a>
-		</p>
-			```python
-			>>> import networkx as nx
-			>>> G = nx.Graph()
-			>>> G.add_edges('A', 'B', weight=6, relation='family')
-			>>> G.add_edges('B', 'C', weight=13, relation='friend')
-			>>>
-			>>> # To get list of all edges
-			>>> G.edges()
-				[('A', 'B'), ('C', 'B')]
-			>>>
-			>>> # To get list of all edges with attributes
-			>>> G.edges(data=True)
-				[('A', 'B', {'relation': 'family', 'weight': 6}), ('C', 'B', {'relation': 'friend', 'weight': 13})]
-			>>>
-			>>> # To get list of all edges with attribute 'relation'
-			>>> G.edges(relation=True)
-				[('A', 'B', 'family'), ('C', 'B', 'friend')]
-			>>>
-			>>> # To access attributes of particular edge
-			>>> # dictionary of attributes of edge (A, B)
-			>>> G.edge['A']['B']
-				{'relation': 'family', 'weight': 6}
-			>>>
-			>>> # To get the weight of edge (B, C)
-			>>> G.edge['B']['C']['weight']
-				13
-			>>> G.edge['C']['B']['weight'] # undirected graph, order does not matter
-				13
-			```
+			<p align="center">
+			  <a href="javascript:void(0)" rel="noopener">
+			 <img width=400px  src="notesImages/edge_attribs_network_example_image1.png" alt="edge_attribs_network_example_image1"></a>
+			</p>
+		```python
+		>>> import networkx as nx
+		>>> G = nx.Graph()
+		>>> G.add_edges('A', 'B', weight=6, relation='family')
+		>>> G.add_edges('B', 'C', weight=13, relation='friend')
+		>>>
+		>>> # To get list of all edges
+		>>> G.edges()
+			[('A', 'B'), ('C', 'B')]
+		>>>
+		>>> # To get list of all edges with attributes
+		>>> G.edges(data=True)
+			[('A', 'B', {'relation': 'family', 'weight': 6}), ('C', 'B', {'relation': 'friend', 'weight': 13})]
+		>>>
+		>>> # To get list of all edges with attribute 'relation'
+		>>> G.edges(relation=True)
+			[('A', 'B', 'family'), ('C', 'B', 'friend')]
+		>>>
+		>>> # To access attributes of particular edge
+		>>> # dictionary of attributes of edge (A, B)
+		>>> G.edge['A']['B']
+			{'relation': 'family', 'weight': 6}
+		>>>
+		>>> # To get the weight of edge (B, C)
+		>>> G.edge['B']['C']['weight']
+			13
+		>>> G.edge['C']['B']['weight'] # undirected graph, order does not matter
+			13
+		```
 	* In case of **directed graph**
-		<p align="center">
-		  <a href="javascript:void(0)" rel="noopener">
-		 <img width=400px  src="notesImages/edge_attribs_network_directed_image2.png" alt="edge_attribs_network_directed_image2"></a>
-		</p>
-			```python
-			>>> import networkx as nx
-			>>> G = nx.DiGraph()
-			>>> G.add_edges('A', 'B', weight=6, relation='family')
-			>>> G.add_edges('C', 'B', weight=13, relation='friend')
-			>>>
-			>>> # To get the weight of edge (C, B)
-			>>> G.edge['C']['B']['weight']
-				13 
-			>>> G.edge['B']['C']['weight'] # Order matters in this type of Network
-				KeyError: 'C'
-			```
+			<p align="center">
+			  <a href="javascript:void(0)" rel="noopener">
+			 <img width=400px  src="notesImages/edge_attribs_network_directed_image2.png" alt="edge_attribs_network_directed_image2"></a>
+			</p>
+		```python
+		>>> import networkx as nx
+		>>> G = nx.DiGraph()
+		>>> G.add_edges('A', 'B', weight=6, relation='family')
+		>>> G.add_edges('C', 'B', weight=13, relation='friend')
+		>>>
+		>>> # To get the weight of edge (C, B)
+		>>> G.edge['C']['B']['weight']
+			13 
+		>>> G.edge['B']['C']['weight'] # Order matters in this type of Network
+			KeyError: 'C'
+		```
 	* In case of **multigraph**
 		* Undirected MultiGraph
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/edge_attribs_network_multigraph_undirected_image3.png" alt="edge_attribs_network_multigraph_undirected_image3"></a>
-			</p>
-				```python
-				>>> import networkx as nx
-				>>> G = nx.MultiGraph()
-				>>> G.add_edges('A', 'B', weight=6, relation='family')
-				>>> G.add_edges('A', 'B', weight=18, relation='friend')
-				>>> G.add_edges('C', 'B', weight=13, relation='friend')
-				>>>
-				>>> # To get one dictionary of attributes per (A, B) edge
-				>>> G.edge['A']['B']
-					{0: {'relation' : 'family', 'weight': 6}, 
-						1: {'relation': 'friend', 'weight': 18}}
-				>>>
-				>>> # as it is undirected graph, order does not matter
-				>>> G.edge['A']['B'][0]['weight']
-					6 
-				>>> G.edge['A']['B'][1]['weight']
-					18 
-				```
+				<p align="center">
+				  <a href="javascript:void(0)" rel="noopener">
+				 <img width=400px  src="notesImages/edge_attribs_network_multigraph_undirected_image3.png" alt="edge_attribs_network_multigraph_undirected_image3"></a>
+				</p>
+			```python
+			>>> import networkx as nx
+			>>> G = nx.MultiGraph()
+			>>> G.add_edges('A', 'B', weight=6, relation='family')
+			>>> G.add_edges('A', 'B', weight=18, relation='friend')
+			>>> G.add_edges('C', 'B', weight=13, relation='friend')
+			>>>
+			>>> # To get one dictionary of attributes per (A, B) edge
+			>>> G.edge['A']['B']
+				{0: {'relation' : 'family', 'weight': 6}, 
+					1: {'relation': 'friend', 'weight': 18}}
+			>>>
+			>>> # as it is undirected graph, order does not matter
+			>>> G.edge['A']['B'][0]['weight']
+				6 
+			>>> G.edge['A']['B'][1]['weight']
+				18 
+			```
 		* Directed MultiGraph
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/edge_attribs_network_multigraph_directed_image4.png" alt="edge_attribs_network_multigraph_directed_image4"></a>
-			</p>
-				```python
-				>>> import networkx as nx
-				>>> G = nx.MultiDiGraph()
-				>>> G.add_edges('A', 'B', weight=6, relation='family')
-				>>> G.add_edges('A', 'B', weight=18, relation='friend')
-				>>> G.add_edges('C', 'B', weight=13, relation='friend')
-				>>>
-				>>> # To get one dictionary of attributes per (A, B) edge
-				>>> G.edge['A']['B']
-					{0: {'relation' : 'family', 'weight': 6}, 
-						1: {'relation': 'friend', 'weight': 18}}
-				>>>
-				>>> # as it is directed graph, order does matter
-				>>> G.edge['A']['B'][0]['weight']
-					6 
-				>>> G.edge['B']['A'][0]['weight']
-					KeyError: 'A'
-				```
+				<p align="center">
+				  <a href="javascript:void(0)" rel="noopener">
+				 <img width=400px  src="notesImages/edge_attribs_network_multigraph_directed_image4.png" alt="edge_attribs_network_multigraph_directed_image4"></a>
+				</p>
+			```python
+			>>> import networkx as nx
+			>>> G = nx.MultiDiGraph()
+			>>> G.add_edges('A', 'B', weight=6, relation='family')
+			>>> G.add_edges('A', 'B', weight=18, relation='friend')
+			>>> G.add_edges('C', 'B', weight=13, relation='friend')
+			>>>
+			>>> # To get one dictionary of attributes per (A, B) edge
+			>>> G.edge['A']['B']
+				{0: {'relation' : 'family', 'weight': 6}, 
+					1: {'relation': 'friend', 'weight': 18}}
+			>>>
+			>>> # as it is directed graph, order does matter
+			>>> G.edge['A']['B'][0]['weight']
+				6 
+			>>> G.edge['B']['A'][0]['weight']
+				KeyError: 'A'
+			```
 * Once loaded, how to **access node attributes** data using NetworkX lib
 	* The nodes can also have a particular attribute, so in this case, imagine they're colored by their role in the company. So some are managers, some are traders and some are analysts.
-		<p align="center">
-		  <a href="javascript:void(0)" rel="noopener">
-		 <img width=400px  src="notesImages/node_attribs_network_graph_undirected_image1.png" alt="node_attribs_network_graph_undirected_image1"></a>
-		</p>
+			<p align="center">
+			  <a href="javascript:void(0)" rel="noopener">
+			 <img width=400px  src="notesImages/node_attribs_network_graph_undirected_image1.png" alt="node_attribs_network_graph_undirected_image1"></a>
+			</p>
 		```python
 		>>> import networkx as nx
 		>>> G = nx.Graph()
@@ -451,10 +451,10 @@ by University of Michigan
 
 * **Bipartite Graphs** - a graph is a bipartite graph if it has two sets of nodes which we call L and R, and every single edge connects a node from L to R
 	* So, no edge connects a node from L to another node in L, and no edge connects a node in R to another node in R
-		<p align="center">
-		  <a href="javascript:void(0)" rel="noopener">
-		 <img width=400px  src="notesImages/bipartite_graph_image1.png" alt="bipartite_graph_image1"></a>
-		</p>
+			<p align="center">
+			  <a href="javascript:void(0)" rel="noopener">
+			 <img width=400px  src="notesImages/bipartite_graph_image1.png" alt="bipartite_graph_image1"></a>
+			</p>
 		```python
 		>>> from networkx.algorithms import bipartite
 		>>> B = nx.Graph() # As there is no separate class for Bipartite Graph
@@ -467,10 +467,10 @@ by University of Michigan
 		>>> 
 		>>> B.add_edges_from([('A', 1), ('B', 1), ('C', 1), ('C', 3), ('D', 2), ('E', 3), ('E', 4)])
 		```
-		<p align="center">
-		  <a href="javascript:void(0)" rel="noopener">
-		 <img width=400px  src="notesImages/bipartite_example_image2.png" alt="bipartite_example_image2"></a>
-		</p>
+			<p align="center">
+			  <a href="javascript:void(0)" rel="noopener">
+			 <img width=400px  src="notesImages/bipartite_example_image2.png" alt="bipartite_example_image2"></a>
+			</p>
 * Which graph is Bipartite Graph?
 	* Graph A is bipartite: the two sets of nodes are {A,B,C} and {E,G,F}. All edge connect a node in one set to a node in the other set. Graph B is not bipartite: note that nodes C, B, and F form a triangle, so it is not possible to assign each of these nodes to a side without having edges connecting nodes that were assigned to the same side. In fact, for the same reason, a bipartite graph cannot contain a cycle of an odd number of nodes.
 		<p align="center">
@@ -526,10 +526,10 @@ by University of Michigan
 		* It is a network among the nodes in one side of the group, in this case the L side, in this case the fans, where each pair of nodes is connected if they have a common neighbor in the R side of the bipartite graph
 		* So, in this case, there would be exactly the network between the fans, such that they're connected if they have at least one team in common
 	* **Network of fans will have at least one team in common**
-		<p align="center">
-		  <a href="javascript:void(0)" rel="noopener">
-		 <img width=400px  src="notesImages/network_bipartite_one_team_common_image1.png" alt="network_bipartite_one_team_common_image1"></a>
-		</p>
+			<p align="center">
+			  <a href="javascript:void(0)" rel="noopener">
+			 <img width=400px  src="notesImages/network_bipartite_one_team_common_image1.png" alt="network_bipartite_one_team_common_image1"></a>
+			</p>
 		*  So in this network, the edge A, H, appears in the projection because both A and H are fans of Team 1, and the edge J, E, appears in this network because they're both fans of team 4
 		* Python Code for Projected Graph
 			1. Graph for Left side
@@ -560,10 +560,10 @@ by University of Michigan
 					</p>
 	* **L-bipartite Weighted Graphs Projection** of the bipartite graph
 		* An L-bipartite graph projection with weights on the edges that are proportional to the number of common neighbor between the nodes
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/bipartite_graph_fans_have_common_fans_weighted_image2.png" alt="bipartite_graph_fans_have_common_fans_weighted_image2"></a>
-			</p>
+				<p align="center">
+				  <a href="javascript:void(0)" rel="noopener">
+				 <img width=400px  src="notesImages/bipartite_graph_fans_have_common_fans_weighted_image2.png" alt="bipartite_graph_fans_have_common_fans_weighted_image2"></a>
+				</p>
 			```python
 			>>> B = nx.Graph()
 			>>> B.add_edges_from([('A', 1), ('B', 1), ('C', 1), ('D', 1), ('H', 1), ('B', 2), ('C', 2), ('D', 2), ('E', 2), ('G', 2), ('E', 3), ('F', 3), ('H', 3), ('J', 3), ('E', 4), ('I', 4), ('T', 4), ('J', 4)])
@@ -576,7 +576,7 @@ by University of Michigan
 
 <p align="center">
   <a href="javascript:void(0)" rel="noopener">
- <img width=400px  src="notesImages/bipartite_summary_image2.png" alt="bipartite_summary_image2"></a>
+ <img width=800px  src="notesImages/bipartite_summary_image2.png" alt="bipartite_summary_image2"></a>
 </p>
 
 
