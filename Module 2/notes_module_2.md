@@ -86,10 +86,10 @@ by University of Michigan
 						>>> nx.transitivity(G)
 							0.409090909091
 						```
-							<p align="center">
-							  <a href="javascript:void(0)" rel="noopener">
-							 <img width=400px  src="notesImages/cc_triadic_closure_image1.png" alt="cc_triadic_closure_image1"></a>
-							</p>
+						<p align="center">
+						  <a href="javascript:void(0)" rel="noopener">
+						 <img width=400px  src="notesImages/cc_triadic_closure_image1.png" alt="cc_triadic_closure_image1"></a>
+						</p>
 		* Transitivity vs Average Local Clustering Coefficient
 			* They both try to measure the tendency for the edges to form triangles
 			* **Transitivity** weights the nodes with a larger number of connections higher
@@ -152,10 +152,10 @@ by University of Michigan
 		>>> nx.shortest_path_length(G, 'A', 'H')
 			4
 		```
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/dm_distance_between_nodes_example_image2.png" alt="dm_distance_between_nodes_example_image2"></a>
-			</p>
+		<p align="center">
+		  <a href="javascript:void(0)" rel="noopener">
+		 <img width=400px  src="notesImages/dm_distance_between_nodes_example_image2.png" alt="dm_distance_between_nodes_example_image2"></a>
+		</p>
 * Finding a distance from a particular Node to every other nodes
 	1. **Breadth-first Search**
 		* It is a systematic and efficient procedure for computing distances from a node to all other nodes in a large network by "discovering" nodes in layers
@@ -178,10 +178,10 @@ by University of Michigan
 					>>> nx.shortest_path_length(G, 'A')
 						OUTPUT SHOWN IN IMAGE BELOW
 					```
-						<p align="center">
-						  <a href="javascript:void(0)" rel="noopener">
-						 <img width=400px  src="notesImages/dm_breadth_first_search_code_example_image4.png" alt="dm_breadth_first_search_code_example_image4"></a>
-						</p>
+					<p align="center">
+					  <a href="javascript:void(0)" rel="noopener">
+					 <img width=400px  src="notesImages/dm_breadth_first_search_code_example_image4.png" alt="dm_breadth_first_search_code_example_image4"></a>
+					</p>
 * How to characterize the distance between all pairs of nodes in a graph?
 	1. **Average Distance** between every pair of nodes in the network
 		```python
@@ -200,10 +200,10 @@ by University of Michigan
 		>>> nx.eccentricity(G)
 			OUTPUT SHOWN IN IMAGE
 		```
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/dm_eccentricity_example_image5.png" alt="dm_eccentricity_example_image5"></a>
-			</p>
+		<p align="center">
+		  <a href="javascript:void(0)" rel="noopener">
+		 <img width=400px  src="notesImages/dm_eccentricity_example_image5.png" alt="dm_eccentricity_example_image5"></a>
+		</p>
 	1. **Radius** - The radius of graph	is the minimum eccentricity in the network
 		```python
 		>>> nx.radius(G)
@@ -339,10 +339,10 @@ by University of Michigan
 					>>> sorted(nx.strongly_connected_components(G))
 						[{M}, {L}, {K}, {A,B,C,D,E,F,G,J,N,O}, {H,I}]
 					```
-						<p align="center">
-						  <a href="javascript:void(0)" rel="noopener">
-						 <img width=400px  src="notesImages/cg_directed_graph_strongly_connected_image2.png" alt="cg_directed_graph_strongly_connected_image2"></a>
-						</p>
+					<p align="center">
+					  <a href="javascript:void(0)" rel="noopener">
+					 <img width=400px  src="notesImages/cg_directed_graph_strongly_connected_image2.png" alt="cg_directed_graph_strongly_connected_image2"></a>
+					</p>
 		1. **Weakly Connected Components** 
 			* The connected components of the graph after replacing all directed edges with undirected edges
 				* Then we would find the connected components in the new undirected graph
@@ -437,10 +437,10 @@ by University of Michigan
 						['G','J','O','K','L'],
 						['G','J','O','L',]]
 					```
-						<p align="center">
-						  <a href="javascript:void(0)" rel="noopener">
-						 <img width=400px  src="notesImages/nr_simple_paths_image1.png" alt="nr_simple_paths_image1"></a>
-						</p>
+					<p align="center">
+					  <a href="javascript:void(0)" rel="noopener">
+					 <img width=400px  src="notesImages/nr_simple_paths_image1.png" alt="nr_simple_paths_image1"></a>
+					</p>
 			1. If we wanted to block the message from G to L by removing nodes from the network, how many nodes would we need to remove?
 				```python
 				>>> nx.node_connectivity(G, 'G', 'L') # G_un -> Undirected Graph
@@ -465,10 +465,10 @@ by University of Michigan
 					>>> nx.minimum_edge_cut(G, 'G', 'L')
 						{('A','N'), ('J','O')}
 					```
-						<p align="center">
-						  <a href="javascript:void(0)" rel="noopener">
-						 <img width=400px  src="notesImages/nr_simple_paths_image2.png" alt="nr_simple_paths_image2"></a>
-						</p>
+					<p align="center">
+					  <a href="javascript:void(0)" rel="noopener">
+					 <img width=400px  src="notesImages/nr_simple_paths_image2.png" alt="nr_simple_paths_image2"></a>
+					</p>
 
 ##### Summary 
 
