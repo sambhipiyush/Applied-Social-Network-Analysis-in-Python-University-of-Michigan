@@ -217,9 +217,9 @@ by University of Michigan
 			```
 	1. **Center** - The Center of the graph is the set of nodes that have eccentricity equal to the radius
 		```python
-			>>> nx.center(G)
-				['C', 'F', 'E']
-			```
+		>>> nx.center(G)
+			['C', 'F', 'E']
+		```
 * Example
 	* Check the image
 		<p align="center">
