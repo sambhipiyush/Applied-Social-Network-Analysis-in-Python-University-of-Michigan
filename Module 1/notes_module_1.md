@@ -467,10 +467,10 @@ by University of Michigan
 		>>> 
 		>>> B.add_edges_from([('A', 1), ('B', 1), ('C', 1), ('C', 3), ('D', 2), ('E', 3), ('E', 4)])
 		```
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/bipartite_example_image2.png" alt="bipartite_example_image2"></a>
-			</p>
+		<p align="center">
+		  <a href="javascript:void(0)" rel="noopener">
+		 <img width=400px  src="notesImages/bipartite_example_image2.png" alt="bipartite_example_image2"></a>
+		</p>
 * Which graph is Bipartite Graph?
 	* Graph A is bipartite: the two sets of nodes are {A,B,C} and {E,G,F}. All edge connect a node in one set to a node in the other set. Graph B is not bipartite: note that nodes C, B, and F form a triangle, so it is not possible to assign each of these nodes to a side without having edges connecting nodes that were assigned to the same side. In fact, for the same reason, a bipartite graph cannot contain a cycle of an odd number of nodes.
 		<p align="center">
