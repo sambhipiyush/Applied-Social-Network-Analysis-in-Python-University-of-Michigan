@@ -324,7 +324,7 @@ by University of Michigan
 			>>> nx.is_weakly_connected(G)
 				True
 			```
-				* This graph is weakly connected because once you turn it into an undirected graph, this undirected graph is connected
+			* This graph is weakly connected because once you turn it into an undirected graph, this undirected graph is connected
 	* **Connected Components**
 		1. **Strongly Connected Components** is a subset of nodes such that there are two conditions this set of nodes satisfy
 				<p align="center">
