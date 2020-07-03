@@ -171,13 +171,13 @@ by University of Michigan
 						  <a href="javascript:void(0)" rel="noopener">
 						 <img width=400px  src="notesImages/dm_breadth_first_search_example_image3.png" alt="dm_breadth_first_search_example_image3"></a>
 						</p>
-							```python
-							>>> T = nx.bfs_tree(G, 'A')
-							>>> T.edges()
-								OUTPUT SHOWN IN IMAGE BELOW
-							>>> nx.shortest_path_length(G, 'A')
-								OUTPUT SHOWN IN IMAGE BELOW
-							```
+					```python
+					>>> T = nx.bfs_tree(G, 'A')
+					>>> T.edges()
+						OUTPUT SHOWN IN IMAGE BELOW
+					>>> nx.shortest_path_length(G, 'A')
+						OUTPUT SHOWN IN IMAGE BELOW
+					```
 						<p align="center">
 						  <a href="javascript:void(0)" rel="noopener">
 						 <img width=400px  src="notesImages/dm_breadth_first_search_code_example_image4.png" alt="dm_breadth_first_search_code_example_image4"></a>
@@ -196,14 +196,14 @@ by University of Michigan
 		```
 * How to summarize the distances between all pairs of nodes in a graph?
 	1. **Eccentricity** of a node **n** is the largest distance between **n** and all other nodes.
-			<p align="center">
-			  <a href="javascript:void(0)" rel="noopener">
-			 <img width=400px  src="notesImages/dm_eccentricity_example_image5.png" alt="dm_eccentricity_example_image5"></a>
-			</p>
 		```python
 		>>> nx.eccentricity(G)
 			OUTPUT SHOWN IN IMAGE
 		```
+			<p align="center">
+			  <a href="javascript:void(0)" rel="noopener">
+			 <img width=400px  src="notesImages/dm_eccentricity_example_image5.png" alt="dm_eccentricity_example_image5"></a>
+			</p>
 	1. **Radius** - The radius of graph	is the minimum eccentricity in the network
 		```python
 		>>> nx.radius(G)
@@ -335,14 +335,14 @@ by University of Michigan
 			1. No other node outside of the subset has a __directed__ path to and from every node inside the subset
 			* What are the strongly connected components of this graph?
 				* Using NetworkX
-						<p align="center">
-						  <a href="javascript:void(0)" rel="noopener">
-						 <img width=400px  src="notesImages/cg_directed_graph_strongly_connected_image2.png" alt="cg_directed_graph_strongly_connected_image2"></a>
-						</p>
 					```python
 					>>> sorted(nx.strongly_connected_components(G))
 						[{M}, {L}, {K}, {A,B,C,D,E,F,G,J,N,O}, {H,I}]
 					```
+						<p align="center">
+						  <a href="javascript:void(0)" rel="noopener">
+						 <img width=400px  src="notesImages/cg_directed_graph_strongly_connected_image2.png" alt="cg_directed_graph_strongly_connected_image2"></a>
+						</p>
 		1. **Weakly Connected Components** 
 			* The connected components of the graph after replacing all directed edges with undirected edges
 				* Then we would find the connected components in the new undirected graph
@@ -429,10 +429,6 @@ by University of Michigan
 		* For Example
 			1. Node 'G' wants to send a message to node 'L' by passing it along to other nodes in this network
 				* What options does 'G' have to deliver the message?
-						<p align="center">
-						  <a href="javascript:void(0)" rel="noopener">
-						 <img width=400px  src="notesImages/nr_simple_paths_image1.png" alt="nr_simple_paths_image1"></a>
-						</p>
 					```python
 					>>> sorted(nx.all_simple_paths(G, 'G', 'L'))
 						[['G','A','N','L'],
@@ -441,6 +437,10 @@ by University of Michigan
 						['G','J','O','K','L'],
 						['G','J','O','L',]]
 					```
+						<p align="center">
+						  <a href="javascript:void(0)" rel="noopener">
+						 <img width=400px  src="notesImages/nr_simple_paths_image1.png" alt="nr_simple_paths_image1"></a>
+						</p>
 			1. If we wanted to block the message from G to L by removing nodes from the network, how many nodes would we need to remove?
 				```python
 				>>> nx.node_connectivity(G, 'G', 'L') # G_un -> Undirected Graph
@@ -448,7 +448,7 @@ by University of Michigan
 				```
 				* It means, if we just remove 2 nodes, to block communication between G and L
 				* To check, Which node we need to remove to achieve this?
-					```
+					```python
 					>>> nx.minimum_node_cut(G, 'G', 'L')
 						{'N', 'O'}
 					```
@@ -461,14 +461,14 @@ by University of Michigan
 				```
 				* It means, if we just remove 2 edges, to block communication between G and L
 				* To check, Which edge we need to remove to achieve this?
+					```python
+					>>> nx.minimum_edge_cut(G, 'G', 'L')
+						{('A','N'), ('J','O')}
+					```
 						<p align="center">
 						  <a href="javascript:void(0)" rel="noopener">
 						 <img width=400px  src="notesImages/nr_simple_paths_image2.png" alt="nr_simple_paths_image2"></a>
 						</p>
-					```
-					>>> nx.minimum_edge_cut(G, 'G', 'L')
-						{('A','N'), ('J','O')}
-					```
 
 ##### Summary 
 
