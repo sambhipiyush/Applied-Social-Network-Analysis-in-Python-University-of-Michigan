@@ -1,0 +1,795 @@
+Week 1
+
+import networkx as nx
+G = nx.Graph()       --> undirected graph
+G.add_edge('A', 'B')
+G.add_edge('B', 'C')
+
+G = nx.DiGraph()     --> directed graph
+G.add_edge('B', 'A')
+
+G = nx.Graph()
+G.add_edge('A', 'B', weight = 6)
+
+G = nx.Graph()
+G.add_edge('A', 'B', sign = '+')
+
+G = nx.Graph()
+G.add_edge('A', 'B', relation = 'friend')
+
+G = nx.MultiGraph()
+G.add_edge('A', 'B', relation = 'friend')
+G.add_edge('A', 'B', relation = 'coworker')
+
+G.edges() #list of all edges
+
+G.edges(data = True) #list of all edges with attributes
+G.edges(data = 'relation') #list of all edges with attribute 'relation'
+
+G.edge['A']['B'] #dictionary of attributes of edge(A, B)
+
+G.edge['B']['C']['weight'] = G.edge['C']['B']['weight']
+#if undirected graph, order of listing nodes doesn't matter
+
+G = nx.DiGraph()
+G.add_edge('A', 'B', weight = 6, relation = 'family')
+G.add_edge('C', 'B', weight = 13, relation = 'friend')
+
+In: G.edge['C']['B']['weight']
+Out: 13
+
+In: G.edge['B']['C']['weight'] #directed graph, order matters
+Out: KeyError: 'C'
+
+G = nx.MultiGraph()
+G.add_edge('A', 'B', weight = 6, relation = 'family')
+G.add_edge('A', 'B', weight = 18, relation = 'friend')
+G.add_edge('C', 'B', weight = 13, relation = 'friend')
+
+In: G.edge['A']['B'] #One dictionary of attributes per (A, B) edge
+Out: {0: {'relation': 'family', 'weight': 6},
+1: {'relation': 'friend', 'weight': 18}}
+
+In: G.edge['A']['B'][0]['weight'] #undirected graph, order doesn't matter
+Out: 6
+
+G = nx.MultiDiGraph()
+G.add_edge('A', 'B', weight = 6, relation = 'family')
+G.add_edge('A', 'B', weight = 18, relation = 'friend')
+G.add_edge('C', 'B', weight = 13, relation = 'friend')
+
+In: G.edge['A']['B'][0]['weight']
+Out: 6
+
+In: G.edge['B']['A'][0]['weight'] #directed graph, order matters
+Out: KeyError: 'A'
+
+G = nx.Graph()
+G.add_edge('A', 'B', weight = 6, relation = 'family')
+G.add_edge('B', 'C', weight = 13, relation = 'friend')
+
+G.add_node('A', role = 'trader')
+G.add_node('B', role = 'trader')
+G.add_node('C', role = 'manager')
+
+In: G.nodes() #list of all nodes
+Out: ['A', 'C', 'B']
+
+In: G.nodes(data = True) #list of all nodes with attributes
+Out: [('A', {'role': 'trader'}), ('C', {'role': 'manager'}),
+      ('B', {'role': 'trader'})]
+
+In: G.node['A']['role']
+Out: 'manager'
+
+from networkx.algorithms import bipartite
+B = nx.Graph() #No separate class for bipartite graphs
+B.add_nodes_from(['A', 'B', 'C', 'D', 'E'], bipartite = 0)
+#label one set of nodes 0
+B.add_nodes_from([1, 2, 3, 4], bipartite = 1)
+#label other set of nodes 1
+B.add_edges_from([('A', 1), ('B', 1), ('C', 1), ('C', 3), ('D', 2), ('E', 3),
+('E', 4)])
+
+In: bipartite.is_bipartite(B) #check if B is bipartite
+Out: True
+
+In: B.add_edge('A', 'B')
+
+In: bipartite.is_bipartite(B)
+Out: False
+
+B.remove_edge('A', 'B')
+
+In: X = set([1, 2, 3, 4])
+In: bipartite.is_bipartite_node_set(B, X)
+Out: True
+
+X = set(['A', 'B', 'C', 'D', 'E'])
+In: bipartite.is_bipartite_node_set(B, X)
+Out: True
+
+X = set([1, 2, 3, 4, 'A'])
+In: bipartite.is_bipartite_node_set(B, X)
+Out: False
+
+In: bipartite.sets(B)
+Out: ({'A', 'B', 'C', 'D', 'E'}, {1, 2, 3, 4})
+
+In: B.add_edge('A', 'B')
+In: bipartite.sets(B)
+Out: NetworkXError: Graph is not bipartite.
+
+B.remove_edge('A', 'B')
+
+B = nx.Graph()
+B.add_edges_from([('A', 1), ('B', 1),
+('C', 1), ('D', 1), ('H', 1), ('B', 2), ('C', 2), 
+('D', 2), ('E', 2), ('G', 2), ('E', 3), ('F', 3), ('H', 3),
+('J', 3), ('E', 4), ('I', 4), ('J', 4)])
+
+X = set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'])
+P = bipartite.projected_graph(B, X)
+
+B = nx.Graph()
+B.add_edges_from([('A', 1), ('B', 1),
+('C', 1), ('D', 1), ('H', 1), ('B', 2), ('C', 2), 
+('D', 2), ('E', 2), ('G', 2), ('E', 3), ('F', 3), ('H', 3),
+('J', 3), ('E', 4), ('I', 4), ('J', 4)])
+
+X = set([1, 2, 3, 4])
+P = bipartite.projected_graph(B, X)
+
+X = set([1, 2, 3, 4])
+P = bipartite.weighted_projected_graph(B, X)
+
+-----------------------------------------------------
+
+Week 2
+
+G = nx.Graph()
+G.add_edges_from([('A', 'K'), ('A', 'B'), ('A', 'C'),
+('B', 'C'), ('B', 'K'), ('C', 'E'), ('C', 'F'),
+('D', 'E'), ('E', 'F'), ('E', 'H'), ('F', 'G'), ('I', 'J')])
+
+In: nx.clustering(G, 'F')
+Out: 0.33333333333333333333
+
+In: nx.clustering(G, 'A')
+Out: 0.66666666666666666666
+
+In: nx.clustering(G, 'J')
+Out: 0.0
+
+In: nx.average_clustering(G)
+Out: 0.28787878787878787878785
+
+In: nx.transitivity(G)
+Out: 0.4090909090909091
+
+Path = a sequence of nodes connected by an edge
+Path length = no. of steps it contains from beginning to end
+Distance b/w 2 nodes = the length of the shortest path b/w them
+
+In: nx.shortest_path(G, 'A', 'H')
+Out: ['A', 'B', 'C', 'E', 'H']
+
+In: nx.shortest_path_length(G, 'A', 'H')
+Out: 4
+
+Breadth-first search - a systematic and efficient
+procedure for computing distances from a node to all
+other nodes in a large network by 'discovering' nodes
+in layers
+
+In: nx.bfs_tree(G, 'A')
+In: T.edges()
+Out: [('A', 'K'), ('A', 'B'), ('B', 'C'), 
+('C', 'E'), ('C', 'F'), ('E', 'I'), ('E', 'H'),
+('E', 'D'), ('F', 'G'), ('I', 'J')]
+
+In: nx.shortest_path_length(G, 'A')
+Out: {'A': 0, 'B': 1, 'C': 2, 'D': 4, 'E': 3,
+'F': 3, 'G': 4, 'H': 4, 'I': 4, 'J': 5, 'K': 1}
+
+In: nx.average_shortes_path_length(G)
+# to calculate the avg. distance b/w every pair of nodes
+Out: 2.5272727272727
+
+Diameter = max distance b/w any pair of nodes
+
+In: nx.diameter(G)
+Out: 5
+
+Eccentricity - of a node n is the largest distance 
+b/w n and all other nodes
+
+In: nx.eccentricity(G)
+Out: {'A': 5, 'B': 4, 'C': 3, 'D': 4, 'E': 3, 'F': 3,
+'G': 4, 'H': 4, 'I': 4, 'J': 5, 'K': 5}
+
+Radius = of a graph is the minimum eccentricity
+
+In: nx.radius(G)
+Out: 3
+
+Periphery = of a graph is the set of nodes that have
+eccentricity equal to the diameter
+
+In: nx.periphery(G)
+Out: ['A', 'K', 'J']
+
+Center = of a graph is the set of nodes that have
+eccentricity equal to the radius
+
+In: nx.center(G)
+Out: ['C', 'E', 'F']
+
+G = nx.karate_club_graph()
+G = nx.convert_node_labels_to_integers(G, first_label = 1)
+
+Average shortest path = 2.41
+Radius = 3
+Diameter = 5
+Center = [1, 2, 3, 4, 9, 14, 20, 32]
+Periphery: [15, 16, 17, 19, 21, 23, 24, 27, 30]
+
+An undirected graph is connected if, for every
+pair of nodes, there is a path b/w them
+
+In: nx.is_connected(G)
+Out: True
+
+Connected component = a subset of nodes such that
+  1) every node in the subset has a path to every other node
+  2) no other node has a path to any node in the subset
+
+In: nx.number_connected_components(G)
+Out: 3
+
+In: sorted(nx.connected_components(G))
+Out: [{'A', 'B', 'C', 'D', 'E'},
+      {'F', 'G', 'H', 'I', 'J'},
+      {'K', 'L', 'M', 'N', 'O'}]
+
+In: nx.node_connected_component(G, 'M')
+Out: {'K', 'L', 'M', 'N', 'O'}
+
+A directed graph is strongly connected if, for every
+pair of nodes u and v, there is a directed path from
+u to v and a directed path from v to u.
+
+In: nx.is_strongly_connected(G)
+Out: False
+
+A directed graph is weakly connected if replacing all
+directed edges with undirected edges produces a 
+connected undirected graph.
+
+In: nx.is_weakly_connected(G)
+Out: True
+
+Strongly connected component = 
+a subset of nodes such that
+  1) every node in the subset has a directed path to every other node
+  2) no other node has a directed path to and from every node in the subset
+
+In: sorted(nx.strongly_connected_components(G))
+Out: [{M}, {L}, {K}, {A, B, C, D, E, F, G, J, N, O},
+{H, I}]
+
+Weakly connected component:
+The connected components of the graph after replacing
+all directed edges with undirected edges
+
+In: sorted(nx.weakly_connected_components(G))
+Out: [{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+'J', 'K', 'L', 'M', 'N', 'O'}]
+
+Network robustness = the ability of a network to 
+maintain its general structural properties when it
+faces failures or attacks.
+
+Types of attacks = removal of nodes or edges
+
+Structural properties = connectivity
+
+Examples = airport closures, internet router failures,
+power line failures
+
+Disconnecting a graph
+
+What is the smallest no. of nodes that can be removed
+from this graph in order to disconnect it?
+
+In: nx.node_connectivity(G_un)
+Out: 1
+
+Which node?
+In: nx.minimum_node_cut(G_un)
+Out: {'A'}
+
+What is the smallest no. of edges that can be removed
+from this graph in order to disconnect it?
+
+In: nx.edge_connectivity(G_un)
+Out: 2
+
+Which edges?
+In: nx.minimum_edge_cut(G_un)
+Out: {('A', 'G'), ('O', 'J')}
+
+Robust networks have large minimum node and edge cuts
+
+Simple Paths
+
+Imagine node G wants to send a message to node L by
+passing it along to other nodes in this network.
+
+What options does G have to deliver the message?
+
+In: sorted(nx.all_simple_paths(G, 'G', 'L'))
+Out: [['G', 'A', 'N', 'L'],
+['G', 'A', 'N', 'O', 'K', 'L'],
+['G', 'A', 'N', 'O', 'L'],
+['G', 'J', 'O', 'K', 'L'],
+['G', 'J', 'O', 'L']]
+
+Node Connectivity
+
+If we wanted to block the message from G to L by
+removing nodes from the network, how many nodes would
+we need to remove?
+
+In: nx.node_connectivity(G, 'G', 'L')
+Out: 2
+
+Which nodes?
+In: nx.minimum_node_cut(G, 'G', 'L')
+Out: {'N', 'O'}
+
+Edge Connectivity 
+
+If we wanted to block the message from G to L by 
+removing edges from the network, how many edges would
+we need to remove?
+
+In: nx.edge_connectivity(G, 'G', 'L')
+Out: 2
+
+Which edges?
+In: nx.minimum_edge_cut(G, 'G', 'L')
+Out: {('A', 'N'), ('J', 'O')}
+------------------------------------------------------
+
+Week 3
+
+Node Importance
+
+Based on the structure of the network, which are the
+5 most important node in the Karate Club friendship
+network?
+
+Different ways of thinking about "importance"
+
+Ex. Degree = number of friends
+5 most important nodes are - 34, 1, 33, 3, 2
+
+    Average proximity to other nodes
+5 most important nodes are - 1, 3, 34, 32, 9
+
+    Fraction of shortest paths that pass through node
+5 most important nodes are - 1, 34, 33, 3, 32
+
+Network Centrality
+
+Centrality measures identify the most important
+nodes in a network:
+  a) Influential nodes in a social network
+  b) Nodes that disseminate info to many nodes or
+     prevent epidemics
+  c) Hubs in a transportation network
+  d) Important pages on the Web
+  e) Nodes that prevent the network from breaking up
+
+Many centrality measures
+  1) Degree centrality
+  2) Closeness centrality
+  3) Betweenness centrality
+  4) Load centrality
+  5) Page Rank
+  6) Katz centrality
+  7) Percolation centrality
+
+Degree Centrality
+
+Assumption: important nodes have many connections
+
+The most basic measure of centrality - number of
+neighbors
+
+Undirected networks: use degree
+Directed networks: use in-degree or out-degree
+
+Degree Centrality - Undirected networks
+
+In: G = nx.karate_club_graph()
+In: G = nx.convert_node_labels_to_integers(G, first_label = 1)
+In: degCent = nx.degree_centrality(G)
+In: degCent[34]
+Out: 0.515 # 17/33
+In: degCent[33]
+Out: 0.364 # 12/33
+
+Degree Centrality - Directed networks
+
+In: indegCent = nx.in_degree_centrality(G)
+In: indegCent['A']
+Out: 0.143 # 2/14
+In: indegCent['L'
+Out: 0.214 # 3/14
+
+In: outdegCent = nx.out_degree_centrality(G)
+In: outdegCent['A']
+Out: 0.214 # 3/14
+In: outdegCent['L']
+Out: 0.071 # 1/14
+
+Closeness Centrality
+
+Assumption: important nodes are close to other nodes.
+
+In: closeCent = nx.closeness_centrality(G)
+In: closeCent[32]
+Out: 0.541
+
+In: sum(nx.shortest_path_length(G, 32).values())
+Out: 61
+In: (len(G.nodes()) - 1) / 61
+Out: 0.541
+
+Disconnected Nodes
+
+How to measure the closeness centrality of a node when
+it cannot reach all other nodes?
+
+What is the closeness centrality of node L?
+
+Option 1: Consider only nodes that L can reach
+
+Problem: Centrality of 1 is too high for a node that
+can only reach one other node
+
+Option 2: Consider only nodes that L can reach and
+normalize by the fraction of nodes L can reach
+
+This definition matches our definition of closeness
+centrality when a graph is connected since R(L) = N - 1
+
+In: closeCent = nx.closeness_centrality(G, normalized = False)
+In: closeCent['L']
+Out: 1
+
+In: closeCent = nx.closeness_centrality(G, normalized = True)
+In: closeCent['L']
+Out: 0.071
+
+Betweenness Centrality
+
+Assumption: important nodes connect other nodes
+
+Recall: the distance b/w 2 nodes is the length of the
+shortest path b/w them.
+
+Ex. The distance b/w nodes 34 and 2 is 2:
+Path 1: 34 - 31 - 2
+Path 2: 34 - 14 - 2
+Path 3: 34 - 20 - 2
+
+Nodes 31, 14 and 20 are in a shortest path of
+between nodes 34 and 2.
+
+In: btwnCent = nx.betweenness_centrality(G,
+	         normalized = True, endpoints = False)
+In: import operator
+In: sorted(btwnCent.items(),
+	   key = operator.itemgetter(1), reverse = True)[0:5]
+Out: [(1, 0.437635....),
+      (34, 0.304......),
+      (33, 0.145......),
+      (3, 0.143......),
+      (32, 0.138.....)]
+
+In: btwnCent_approx = nx.betweenness_centrality(G,
+			normalized = True,
+			endpoints = False, k = 10)
+In: sorted(btwnCent_approx.items(),
+	   key = operator.itemgetter(1), reverse = True)[0:5]
+Out: [(1, 0.482.....),
+      (34, 0.275....),
+      (32, 0.208....),
+      (3, 0.169.....),
+      (2, 0.131.....)]
+
+In: btwnCent_subset = 
+nx.betweenness_centrality_subset(G, [34, 33, 21, 30,
+16, 27, 15, 23, 10], [1, 4, 13, 11, 6, 12, 17, 7],
+normalized = True)
+
+In: sorted(btwnCent_subset.items(), 
+           key = operator.itemgetter(1), reverse = True)[0:5]
+Out: [(1, 0.048....),
+      (34, 0.0288..),
+      (3, 0.0183...),
+      (33, 0.016...),
+      (9, 0.0145...)]
+
+In: btwnCent_edge = nx.edge_betweenness_centrality(G,
+normalized = True)
+
+In: sorted(btwnCent_edge.items(),
+key = operator.itemgetter(1), reverse = True)[0:5]
+Out: [((1, 32), 0.127...),
+      ((1, 7), 0.078....),
+      ((1, 6), 0.078....),
+      ((1, 3), 0.0777...),
+      ((1, 9), 0.074....)]
+
+In: btwnCent_edge_subset = 
+nx.edge_betweenness_centrality_subset(G, [34, 33, 21,
+30, 16, 27, 15, 23, 10], [1, 4, 13, 11, 6, 12, 17, 7],
+normalized = True)
+
+In: sorted(btwnCent_edge_subset.items(),
+key = operator.itemgetter(1), reverse = True)[0:5]
+Out: [((1, 32), 0.013....),
+      ((1, 9), 0.013.....),
+      ((14, 34), 0.012...),
+      ((1, 3), 0.0121....),
+      ((1, 7), 0.0120....)]
+
+PageRank
+
+Developed by Google founders to measure the importance
+of webpages from the hyperlink network structure.
+
+PageRank assigns a score of importance to each node.
+Important nodes are those with many in-links from
+important pages.
+
+PageRank can be used for any type of network, but it
+is mainly useful for directed networks.
+
+A node's PageRank depends on the PageRank of other
+nodes (circular definition?)
+
+Interpreting PageRank
+
+The PageRank of a node at step k is the probability
+that a random walker lands on the node after taking
+k steps.
+
+Random walk of k steps:
+Start on a random node. Then choose an outgoing
+edge at random and follow it to the next node.
+Repeat k times.
+
+PageRank Problem
+
+For a large enough k: F and G each have PageRank of
+1/2 and all other nodes have PageRank 0.
+
+Why? Imagine a random walk on this network.
+Whenever the walk lands on F or G, it is 'stuck' on
+F and G.
+
+To fix this, we introduce a "damping parameter" alpha
+
+Random walk of k steps with damping parameter alpha:
+Start on a random node. Then:
+  a) with probability alpha : choose an outgoing edge
+     at random and follow it to the next node.
+  b) with probability 1 - alpha : choose a node at
+     random and go to it.
+Repeat k times.
+
+The Scaled PageRank of k steps and damping factor alpha
+of a node n is the probability that a random walk with
+damping factor alpha lands on a n after k steps.
+
+For most networks, as k gets larger, Scaled PageRank
+converges to a unique value, which depends on alpha.
+
+Damping factor works better in very large networks
+like the Web or large social networks.
+
+You can use NetworkX function pagerank(G, alpha = 0.8)
+to compute Scaled PageRank of network G with damping
+parameter alpha.
+
+Hubs and Authorities
+
+Given a query to a search engine:
+  a) Root = set of highly relevant web pages 
+     (e.g. pages that contain the query string) 
+     --> potential authorities
+  b) Find all pages that link to a page in root 
+     --> potential hubs
+  c) Base = root nodes and any node that links to a 
+     node in root
+  d) Consider all edges connecting nodes in the base set.
+
+HITS Algorithm Convergence
+
+For most networks, as k gets larger, authority and 
+hub scores converge to a unique value.
+
+HITS Algorithm NetworkX
+
+You can use NetworkX function hits(G) to compute the
+hub and authority scores of network G.
+
+hits(G) outputs two dictionaries, keyed by node, with
+the hub and authority scores of the nodes.
+-------------------------------------------------------
+
+Week 4
+
+Degree Distributions
+
+The degree of a node in an undirected graph is the 
+number of neighbors it has.
+
+The degree distribution of a graph is the probability
+distribution of the degrees over the entire network.
+
+Plot of the degree distribution of this network:
+
+degrees = G.degree()
+degree_values = sorted(set(degrees.values()))
+histogram = 
+[list(degrees.values()).count(i)/float(nx.number_of_nodes(
+G)) for i in degree_values]
+
+import matplotlib.pyplot as plt
+plt.bar(degree_values, histogram)
+plt.xlabel('Degree')
+plt.ylabel('Fraction of Nodes')
+plt.show()
+
+In-Degree Distributions
+
+The in-degree of a node in a directed graph is the
+number of in-links it has.
+
+Plot of the in-degree distribution of this network:
+
+in_degrees = G.in_degree()
+in_degree_values = sorted(set(in_degrees.values()))
+histogram = 
+[in_degrees.values().count(i)/float(nx.number_of_nodes(G))
+for i in in_degree_values]
+
+plt.bar(in_degree_values, histogram)
+plt.xlabel('In Degree')
+plt.ylabel('Fraction of Nodes')
+
+Preferential Attachment in NetworkX
+
+barabasi_albert_graph(n, m) returns a network with n
+nodes. Each new node attaches to m existing nodes
+according to the Preferential Attachment model.
+
+G = nx.barabasi_albert_graph(1000000, 1)
+degrees = G.degree()
+degree_values = sorted(set(degrees.values()))
+histogram = 
+[list(degrees.values().count(i))/float(nx.number_of_nodes(G))
+for i in degree_values]
+
+plt.plot(degree_values, histogram, 'o')
+plt.xlabel('Degree')
+plt.ylabel('Fraction of Nodes')
+plt.xscale('log')
+plt.yscale('log')
+plt.show()
+
+In: G = nx.barabasi_albert_graph(1000, 4)
+
+In: print(nx.average_clustering(G))
+Out: 0.0202...
+
+In: print(nx.average_shortest_path_length(G))
+Out: 4.169...
+
+Small World Model in NetworkX
+
+watts_strogatz_graph(n, k, p) returns a small world
+network with n nodes, starting with a ring lattice
+with each node connected to its k nearest neighbors,
+and rewiring probability p.
+
+Small world network degree distribution:
+
+G = nx.watts_strogatz_graph(1000, 6, 0.04)
+degrees = G.degree()
+degree_values = sorted(set(degrees.values()))
+histogram = 
+[list(degrees.values()).count(i)/float(nx.number_of_nodes(G))
+for i in degree_values]
+plt.bar(degree_values, histogram)
+plt.xlabel('Degree')
+plt.ylabel('Fraction of Nodes')
+plt.show()
+
+connected_watts_strogatz_graph(n, k, p, t) runs
+watts_strogatz_graph(n, k, p) up to t times, until it
+returns a connected small world network.
+
+newman_watts_strogatz_graph(n, k, p_ runs a model
+similar to the small world model, but rather than
+rewiring edges, new edges are added with probability p.
+
+Measure 1: Common Neighbors
+
+In: common_neigh = [(e[0], e[1], 
+len(list(nx.common_neighbors(G, e[0], e[1])))) 
+for e in nx.non_edges(G)]
+
+In: sorted(common_neigh, key = operator.itemgetter(2),
+reverse = True)
+In: print(common_neigh)
+
+Out: [('A', 'C', 2), ('A', 'G', 1), ('A', 'F', 1)
+...]
+
+Measure 2: Jaccard Coefficient
+
+In: L = list(nx.jaccard_coefficient(G))
+In: L.sort(key = operator.itemgetter(2), reverse = True)
+In: print(L)
+Out: [('I', 'H', 1.0), ('A', 'C', 0.5), ...]
+
+Measure 3: Resource Allocation
+
+In: L = list(nx.resource_allocation_index(G))
+In: L.sort(key = operator.itemgetter(2), reverse = True)
+In: print(L)
+Out: [('A', 'C', 0.6666), ('A', 'G', 0.3333)...]
+
+Measure 5: Pref. Attachment
+
+In: L = list(nx.preferential_attachment(G))
+In: L.sort(key = operator.itemgetter(2), reverse = True)
+In: print(L)
+Out: [('A', 'G', 12), ('C', 'G', 12),..]
+
+Measure 6: Community Common Neighbors
+
+G.node['A']['community'] = 0
+G.node['B']['community'] = 0
+G.node['C']['community'] = 0
+G.node['D']['community'] = 0
+G.node['E']['community'] = 1
+G.node['F']['community'] = 1
+G.node['G']['community'] = 1
+G.node['H']['community'] = 1
+G.node['I']['community'] = 1
+
+In: L = list(nx.cn_soundarajan_hopcroft(G))
+In: L.sort(key = operator.itemgetter(2), reverse = True)
+In: print(L)
+Out: [('A','C', 4), ('E','I', 2)...]
+
+Measure 7: Community Resource Allocation
+
+In: L = list(nx.ra_index_soundarajan_hopcroft(G))
+In: L.sort(key = operator.itemgetter(2), reverse = True)
+In: print(L)
+Out: [('A', 'C', 0.666), ('E', 'I', 0.25)...]
+
+indeg(A) = 2
+indeg(B) = 1
+indeg(C) = 3
+indeg(D) = 1
+indeg(E) = 1
